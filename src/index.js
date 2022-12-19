@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 
 import costumersRoute from './routes/customers.route.js';
+import authRoute from './routes/auth.route.js'
 
 
 const port = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ connectDatabase();
 
 app.use(express.json())
 app.use('/costumer', costumersRoute)
+app.use('/auth', authRoute)
 
 app.listen(port, () => {
     console.log(`Aplication running on port ${port}`);
