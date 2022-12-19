@@ -1,4 +1,4 @@
-import Costumer from "../models/Costumers.js";
+import Costumer from "../models/Employee.js";
 import jwt from "jsonwebtoken";
 
 const loginService = (email) => {

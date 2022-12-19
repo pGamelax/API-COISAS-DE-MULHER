@@ -3,7 +3,7 @@ import connectDatabase from './database/database.js';
 import dotenv from 'dotenv';
 
 
-import costumersRoute from './routes/customers.route.js';
+import employeeRoute from './routes/employee.route.js';
 import authRoute from './routes/auth.route.js'
 
 
@@ -15,7 +15,7 @@ dotenv.config();
 connectDatabase();
 
 app.use(express.json())
-app.use('/costumer', costumersRoute)
+app.use('/employee', employeeRoute)
 app.use('/auth', authRoute)
 
 app.listen(port, () => {

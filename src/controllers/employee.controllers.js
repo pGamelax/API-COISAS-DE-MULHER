@@ -1,4 +1,4 @@
-import costumerService from '../services/costumers.service.js'
+import employeeService from '../services/employee.service.js'
 
 const create = async (req, res) => {
     try {
@@ -12,25 +12,25 @@ const create = async (req, res) => {
             return res.status(400).send({ message: "Digite uma senha maior que 8 digitos" });
         }
 
-        const costumersFind = await costumerService.findAllService();
+        const employeeFind = await employeeService.findAllService();
 
-        for (let i = 0; i < costumersFind.length; i++) {
-            if (costumersFind[i].email == email) {
+        for (let i = 0; i < employeeFind.length; i++) {
+            if (employeeFind[i].email == email) {
                 return res.status(400).send({ message: "E-mail já cadastrado" });
             }
         }
 
-        const costumer = await costumerService.createService(req.body)
+        const employee = await employeeService.createService(req.body)
 
-        if (!costumer) {
+        if (!employee) {
             return res.status(400).send({ message: 'Erro ao cadastrar a cliente' });
         }
 
         res.status(201).send({
             message: "Cadastrado com sucesso",
 
-            costumer: {
-                id: costumer._id,
+            employee: {
+                id: employee._id,
                 name,
                 email
             }
@@ -42,13 +42,13 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
     try {
-        const costumers = await costumerService.findAllService();
+        const employee = await employeeService.findAllService();
 
-        if (!costumers.length === 0) {
+        if (!employee.length === 0) {
             return res.status(400).send({ message: 'Não há clientes cadastrados' })
         }
 
-        res.send(costumers);
+        res.send(employee);
     } catch (err) {
         return res.status(500).send(({ message: err.message }))
     }
@@ -56,8 +56,8 @@ const findAll = async (req, res) => {
 
 const findById = async (req, res) => {
     try {
-        const costumer = req.costumer
-        res.send(costumer)
+        const employee = req.employee
+        res.send(employee)
     } catch (err) {
         res.status(500).send(({ message: err.message }))
     }
@@ -71,9 +71,9 @@ const update = async (req, res) => {
             return res.status(400).send({ message: "Preencha pelo menos um campo para atualizar" });
         };
 
-        const { id, costumer } = req;
+        const { id } = req;
 
-        await costumerService.updateService(id, name, email, password)
+        await employeeService.updateService(id, name, email, password)
 
         res.send({ message: "Dados atualizado com sucesso" });
 
@@ -86,10 +86,10 @@ const erase = async (req, res) => {
     try {
         const { id } = req;
 
-        await costumerService.deleteService(id)
+        await employeeService.deleteService(id)
 
-        res.send({message: "Cliente deletado com sucesso"})
-        
+        res.send({ message: "Cliente deletado com sucesso" })
+
     } catch (err) {
         return res.status(500).send({ message: err.message })
     }

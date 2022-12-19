@@ -1,22 +1,22 @@
-import Costumers from "../models/Costumers.js"
+import Employee from "../models/Employee.js"
 
 const createService = (body) => {
-    return Costumers.create(body)
+    return Employee.create(body)
 }
 
 const findAllService = () => {
-    return Costumers.find();
+    return Employee.find();
 }
 
 const findByIdService = (id) => {
-    return Costumers.findById(id)
+    return Employee.findById(id)
 }
 
 const updateService = (id, name, email, password) => {
-    return Costumers.findOneAndUpdate({ _id: id }, { name, email, password });
+    return Employee.findOneAndUpdate({ _id: id }, { name, email, password });
 }
 
 const deleteService = (id) => {
-    return Costumers.findOneAndDelete(id)
+    return Employee.findOneAndDelete({_id: id})
 }
 export default { createService, findAllService, findByIdService, updateService, deleteService }

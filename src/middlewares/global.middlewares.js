@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import costumersService from '../services/costumers.service.js';
+import employeeService from '../services/employee.service.js';
 
 export const isValidId = (req, res, next) => {
     const id = req.params.id;
@@ -11,17 +11,17 @@ export const isValidId = (req, res, next) => {
     next()
 }
 
-export const isValidCostumer = async (req, res, next) => {
+export const isValidEmployee = async (req, res, next) => {
     const id = req.params.id;
 
-    const costumer = await costumersService.findByIdService(id);
+    const employee = await employeeService.findByIdService(id);
 
-    if (!costumer === 0 || costumer === null || typeof costumer === undefined) {
+    if (!employee === 0 || employee === null || typeof employee === undefined) {
         return res.status(400).send({ message: 'Cliente não encontrado' });
     };
 
     req.id = id;
-    req.costumer = costumer;
+    req.employee = employee;
 
     next()
 }
