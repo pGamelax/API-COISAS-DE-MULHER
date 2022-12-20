@@ -18,7 +18,7 @@ const sendEmail = (email) => {
             secure: true, // use TLS
             auth: {
                 user: process.env.EMAIL,
-                password: process.env.PASSWORD_EMAIL
+                pass: process.env.PASSWORD_EMAIL
             }
         });
 
