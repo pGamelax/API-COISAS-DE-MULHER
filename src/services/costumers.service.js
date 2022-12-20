@@ -36,6 +36,7 @@ const sendEmail = (email) => {
                 console.log('Email enviado: ' + info.response);
             }
         });
+
     } catch (err) {
         console.log(err.message)
     }
