@@ -87,4 +87,4 @@ const sendEmailUpdated = (name, email) => {
     }
 
 }
-export default { createService, findAllSerivce, updateService, deleteService, findByIdService, sendEmailUpdated, sendEmail }
+export default { createService, sendEmail, findAllSerivce, findByIdService, sendEmailUpdated, deleteService, updateService }
