@@ -1,5 +1,6 @@
 import schedulesService from '../services/schedules.service.js'
 import employeeService from '../services/employee.service.js'
+import costumersService from '../services/costumers.service.js'
 
 const create = async (req, res) => {
     try {
@@ -10,19 +11,28 @@ const create = async (req, res) => {
             return res.status(400).send({ message: "Preencha todos os campos para marcar o horário" })
         }
 
-        const employee = req.employeeId
+        const employee = await employeeService.findByIdService(req.employeeId)
 
         if (!employee) {
             return res.status(400).send({ message: "Não foi possível encontrar a funcionaria" });
         }
 
-        const schedule = await schedulesService.createService({ date, costumer, service, employee: employee })
+        const constumerFind = await costumersService.findByIdService(costumer)
 
-        /* const parts = date.split(" ");
-    
+        if (!constumerFind) {
+            return res.status(400).send({ message: "Não foi possível encontrar a funcionaria" });
+        }
+
+        const schedule = await schedulesService.createService({ date, costumer, service, employee: employee.id })
+
+        const parts = date.split(" ");
+
         const [year, mouth, day, hour, minute] = parts
-    
-        await schedulesService.sendEmailService(year,mouth,day,hour,minute) */
+
+
+        schedulesService.sendEmailService(year, mouth, day, hour, minute, employee.name, constumerFind.name, constumerFind.email, service)
+        schedulesService.sendEmailServiceSchedule(year, mouth, day, hour, minute, employee.name, constumerFind.name, constumerFind.email, service)
+
         res.send(schedule)
     } catch (err) {
         res.status(500).send(({ message: err.message }))
@@ -53,7 +63,7 @@ const findAll = async (req, res) => {
         const nextUrl = next < total ? `${currentUrl}?limit=${limit}&offset=${next}` : null
 
         const previous = offset - limit < 0 ? null : offset - limit;
-        const previousUrl = previous != null ? `${currentUrl}?limit=${limit}&offset=${offset-5}` : null
+        const previousUrl = previous != null ? `${currentUrl}?limit=${limit}&offset=${offset - 5}` : null
 
 
         if (schedules.lenght === 0) {

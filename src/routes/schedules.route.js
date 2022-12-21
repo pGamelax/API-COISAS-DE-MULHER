@@ -7,6 +7,6 @@ import { isAdminMiddleware, authMiddleware } from '../middlewares/auth.middlewar
 const router = Router()
 
 router.post('/:costumer', authMiddleware, isAdminMiddleware, schedulesControllers.create)
-router.get('/', schedulesControllers.findAll)
+router.get('/', authMiddleware, isAdminMiddleware, schedulesControllers.findAll)
 
 export default router
