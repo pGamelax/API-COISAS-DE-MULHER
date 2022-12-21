@@ -1,4 +1,4 @@
-import Employee from "../models/Employee.js"
+import Employee from "../models/Employees.js"
 
 const createService = (body) => {
     return Employee.create(body)

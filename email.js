@@ -1,6 +1,11 @@
 import nodemailer from 'nodemailer'
 import schedule from 'node-schedule'
 
+const date = "2022 12 21 18 45"
+const parts = date.split(" ");
+
+const [ano, mes, dia, hora, minute] = parts
+
 const pedro = async () =>{
 // Crie um transporte de email usando o servidor SMTP do seu provedor de email
     let transporter = nodemailer.createTransport({
@@ -25,7 +30,7 @@ const pedro = async () =>{
 
     // Envie o email usando o transporte criado anteriormente
 
-    let scheduleDate = new Date(2022, 11, 19, 22, 22, 0)
+    let scheduleDate = new Date(ano, mes-1, dia, hora, minute, 0)
     schedule.scheduleJob(scheduleDate, () => {
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
@@ -37,4 +42,5 @@ const pedro = async () =>{
     })
 }
 
-export default {pedro}
+pedro()
+

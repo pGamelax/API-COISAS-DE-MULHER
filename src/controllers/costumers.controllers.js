@@ -69,6 +69,28 @@ const findById = async (req, res) => {
     }
 }
 
+const findByName = async (req, res) => {
+    try {
+        const { name } = req.query
+
+        const costumers = await costumersService.findByNameService(name)
+
+        if(costumers.length === 0){
+            return res.status(400).send({message: "Não há clientes com este nome"})
+        }
+
+        return res.send({
+            results: costumers.map(item => ({
+                id: item._id,
+                name: item.name,
+                email: item.email,
+                phone: item.phone
+            }))
+        })
+    } catch (err) {
+        res.status(500).send({ message: err.message })
+    }
+}
 const update = async (req, res) => {
     try {
         const { name, email, phone } = req.body;
@@ -90,7 +112,7 @@ const update = async (req, res) => {
         await costumersService.updateService(id, name, email, phone)
 
         const costumer = await costumersService.findByIdService(id);
-        
+
         costumersService.sendEmailUpdated(costumer.name, costumer.email)
 
         res.send({ message: "Dados atualizado com sucesso" });
@@ -117,4 +139,4 @@ const erase = async (req, res) => {
     }
 }
 
-export default { create, findAll, erase, findById, update }
+export default { create, findAll, erase, findById, update, findByName }

@@ -14,6 +14,11 @@ const findByIdService = (id) => {
     return Costumers.findById(id)
 }
 
+const findByNameService = (name) => {
+    return Costumers.find({
+        name: { $regex: `${name || ""}`, $options: "i" }
+    })
+}
 const updateService = (id, name, email, phone) => {
     return Costumers.findOneAndUpdate({ _id: id }, { name, email, phone });
 }
@@ -87,4 +92,4 @@ const sendEmailUpdated = (name, email) => {
     }
 
 }
-export default { createService, sendEmail, findAllSerivce, findByIdService, sendEmailUpdated, deleteService, updateService }
+export default { createService, sendEmail, findAllSerivce, findByIdService, sendEmailUpdated, deleteService, updateService, findByNameService }

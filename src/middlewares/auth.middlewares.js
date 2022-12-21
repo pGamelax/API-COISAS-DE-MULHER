@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Employee from '../models/Employee.js';
+import Employee from '../models/Employees.js';
 import employeeService from '../services/employee.service.js';
 
 export const authMiddleware = (req, res, next) => {

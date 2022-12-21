@@ -1,7 +1,7 @@
 import mongoose, { mongo } from "mongoose";
 import bcrypt from 'bcrypt';
 
-const EmployeeSchema = new mongoose.Schema({
+const EmployeesSchema = new mongoose.Schema({
     name: {
         type: String,
         require: true,
@@ -22,11 +22,11 @@ const EmployeeSchema = new mongoose.Schema({
 
 });
 
-EmployeeSchema.pre('save', async function (next) {
+EmployeesSchema.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
-const Employee = mongoose.model("Employee", EmployeeSchema);
+const Employees = mongoose.model("Employees", EmployeesSchema);
 
-export default Employee;
+export default Employees;
