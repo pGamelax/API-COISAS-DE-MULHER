@@ -8,16 +8,17 @@ export const isValidId = (req, res, next) => {
         return res.status(400).send({ message: 'Invalid ID' })
     }
     
+    req.id = id
     next()
 }
 
 export const isValidEmployee = async (req, res, next) => {
     const id = req.params.id;
 
-    const employee = await employeeService.findByIdService(id);
-
+    const employee = await employeeService.findByIdService(id); 
+    
     if (!employee === 0 || employee === null || typeof employee === undefined) {
-        return res.status(400).send({ message: 'Cliente não encontrado' });
+        return res.status(400).send({ message: 'Funcionario não encontrado' });
     };
 
     req.id = id;

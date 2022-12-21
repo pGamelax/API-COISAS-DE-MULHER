@@ -16,7 +16,7 @@ dotenv.config();
 connectDatabase();
 
 app.use(express.json())
-app.use('/employee', employeeRoute)
+app.use('/employeers', employeeRoute)
 app.use('/auth', authRoute)
 app.use('/costumers', costumersRoute)
 

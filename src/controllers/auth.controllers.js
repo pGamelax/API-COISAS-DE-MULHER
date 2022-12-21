@@ -5,19 +5,19 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body
 
-        const costumer = await authService.loginService(email);
+        const employee = await authService.loginService(email);
 
-        if (!costumer) {
+        if (!employee) {
             return res.status(404).send({ message: "Usuario ou senha está inválido" })
         }
 
-        const passwordIsValid = bcrypt.compareSync(password, costumer.password)
+        const passwordIsValid = bcrypt.compareSync(password, employee.password)
 
         if (!passwordIsValid) {
             return res.status(404).send({ message: "Usuario ou senha está inválido" })
         }
-
-        const token = authService.generateToken(costumer.id)
+        
+        const token = authService.generateToken(employee.id, employee.isAdmin)
 
         res.send({ token })
 

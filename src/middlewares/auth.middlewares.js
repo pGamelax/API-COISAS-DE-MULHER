@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-import costumerService from '../services/costumers.service.js'
+import Employee from '../models/Employee.js';
+import employeeService from '../services/employee.service.js';
 
 export const authMiddleware = (req, res, next) => {
     try {
@@ -24,14 +25,15 @@ export const authMiddleware = (req, res, next) => {
             if (error) {
                 return res.status(401).send({ message: "Invalid token" })
             }
-            
-            const costumer = await costumerService.findByIdService(decoded.id)
 
-            if (!costumer || !costumer.id) {
+            const employee = await employeeService.findByIdService(decoded.id)
+
+            if (!employee || !employee.id) {
                 return res.status(401).send({ message: "Invalid token" })
             }
 
-            req.userId = user.id;
+            req.employeeId = employee.id;
+            req.isAdmin = employee.isAdmin
 
             return next();
         })
@@ -42,4 +44,11 @@ export const authMiddleware = (req, res, next) => {
         res.status(500).send(({ message: err.message }))
     }
 
+}
+
+export const isAdminMiddleware = (req, res, next) => {
+    if (req.isAdmin == "false") {
+        return res.status(400).send({ message: 'Você não tem permissão para isto!' });
+    }
+    next();
 }

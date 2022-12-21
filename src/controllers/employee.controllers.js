@@ -2,6 +2,8 @@ import employeeService from '../services/employee.service.js'
 
 const create = async (req, res) => {
     try {
+
+        
         const { name, email, password } = req.body;
 
         if (!name || !email || !password) {
@@ -67,7 +69,7 @@ const update = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        if (!name, !email, !password) {
+        if (!name && !email && !password) {
             return res.status(400).send({ message: "Preencha pelo menos um campo para atualizar" });
         };
 
@@ -75,6 +77,7 @@ const update = async (req, res) => {
 
         await employeeService.updateService(id, name, email, password)
 
+        
         res.send({ message: "Dados atualizado com sucesso" });
 
     } catch (err) {

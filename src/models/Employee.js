@@ -15,6 +15,10 @@ const EmployeeSchema = new mongoose.Schema({
         required: true,
         select: false,
     },
+    isAdmin: {
+        type: String,
+        default: "false"
+    }
 
 });
 
