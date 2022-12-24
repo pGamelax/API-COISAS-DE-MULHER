@@ -8,7 +8,7 @@ const createService = (body) => {
 
 const findAllSerivce = () => {
     return Costumers.find();
-}
+}   
 
 const findByIdService = (id) => {
     return Costumers.findById(id)
