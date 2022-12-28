@@ -20,8 +20,6 @@ router.post(
 );
 router.get(
   "/",
-  authMiddleware,
-  isAdminMiddleware,
   schedulesControllers.findAll
 );
 router.get(
