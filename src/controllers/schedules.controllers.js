@@ -141,7 +141,7 @@ const findAll = async (req, res) => {
       })),
     });*/
     
-    const url = "https://api.clashroyale.com/v1/players/%23UYGOJUYCG"
+    const url = "https://api.clashroyale.com/v1/players/%23UYG0JUYCG"
     
     const options = {
       headers: {
