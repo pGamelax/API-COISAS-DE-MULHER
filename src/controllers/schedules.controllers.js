@@ -1,6 +1,7 @@
 import schedulesService from "../services/schedules.service.js";
 import employeeService from "../services/employee.service.js";
 import costumersService from "../services/costumers.service.js";
+import axios from 'axios';
 import moment from "moment-timezone";
 
 const create = async (req, res) => {
@@ -147,7 +148,7 @@ const findAll = async (req, res) => {
         'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImNiMTk3OWRkLTBlNTQtNDQ2MS1iNTk0LTk3ZDlhN2RmZDUwNSIsImlhdCI6MTY3MjI1NTQ1Niwic3ViIjoiZGV2ZWxvcGVyL2NiYzRmNjg0LTg4ZTQtNTZjOC1kMTU1LWJjNDFjZWFmNjBlNyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIzNS4xNjAuMTIwLjEyNiJdLCJ0eXBlIjoiY2xpZW50In1dfQ.6zS8gUzfk3Nlvb-ibk3x5CAAv0755vjBX6YCbX_ZsB2FRF4FC_wKhGKJSmYbfISVwKI-fSL5NyjUjzhlKSopmA'
       }
     }
-      await fetch(url, options).then((resp) => {
+      await axios.get(url, options).then((resp) => {
         res.send(resp.data)
       })
   } catch (err) {
