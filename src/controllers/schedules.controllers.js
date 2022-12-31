@@ -139,6 +139,7 @@ const findAll = async (req, res) => {
         service: item.service,
       })),
     });
+   
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
