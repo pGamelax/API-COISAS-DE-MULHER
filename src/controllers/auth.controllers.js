@@ -5,6 +5,7 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body
 
+        console.log(email, password)
         const employee = await authService.loginService(email);
 
         if (!employee) {
