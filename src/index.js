@@ -1,6 +1,7 @@
 import express from 'express';
 import connectDatabase from './database/database.js';
 import dotenv from 'dotenv';
+import cors from 'cors'
 
 
 import employeeRoute from './routes/employee.route.js';
@@ -16,6 +17,7 @@ dotenv.config();
 
 connectDatabase();
 
+app.use(cors())
 app.use(express.json())
 app.use('/employeers', employeeRoute)
 app.use('/auth', authRoute)

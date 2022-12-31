@@ -5,7 +5,7 @@ import moment from "moment-timezone";
 
 const create = async (req, res) => {
   try {
-    var { date } = req.body;
+    let { date } = req.body;
     const { service, hours } = req.body;
     const { costumer } = req.params;
 
@@ -31,7 +31,7 @@ const create = async (req, res) => {
         .send({ message: "Não foi possível encontrar a cliente" });
     }
 
-    var date = moment(date).format("YYYY-MM-DD");
+    date = moment(date).format("YYYY-MM-DD");
 
     const schedule = await schedulesService.createService({
       date,
@@ -56,7 +56,7 @@ const create = async (req, res) => {
     }
 
     const day = moment(date).format("DD");
-    const mouth = moment(date).format("MM");
+    const month = moment(date).format("MM");
     const year = moment(date).format("YYYY");
 
     const parts = hours.split(":");
@@ -64,7 +64,7 @@ const create = async (req, res) => {
 
     schedulesService.sendEmailService(
       year,
-      mouth,
+      month,
       day,
       hour,
       minute,
@@ -75,7 +75,7 @@ const create = async (req, res) => {
     );
     schedulesService.sendEmailServiceSchedule(
       year,
-      mouth,
+      month,
       day,
       hour,
       minute,

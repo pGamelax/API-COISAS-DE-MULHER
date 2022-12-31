@@ -26,8 +26,8 @@ router.get(
 );
 router.get(
   "/employee",
-  authMiddleware,
-  isAdminMiddleware,
+  //authMiddleware,
+  //isAdminMiddleware,
   schedulesControllers.findByEmployee
 );
 
